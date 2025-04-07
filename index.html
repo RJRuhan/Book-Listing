@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Explorer | Home</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Book Explorer</div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="wishlist.html">My Wishlist</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Explore Books</h1>
+            <p>Find your next favorite book from our extensive collection</p>
+        </section>
+        
+        <section class="filters">
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search by title...">
+            </div>
+            <div class="filter-container">
+                <select id="genre-filter">
+                    <option value="">All Genres</option>
+                    <!-- Will be populated dynamically -->
+                </select>
+            </div>
+        </section>
+
+        <section class="books-container" id="books-list">
+            <!-- Books will be displayed here -->
+            <div class="loading">Loading books...</div>
+        </section>
+        
+        <section class="pagination" id="pagination">
+            <!-- Pagination controls will be added here -->
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Book Explorer. All rights reserved.</p>
+    </footer>
+
+    
+</html>
