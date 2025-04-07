@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Explorer | Home</title>
+    <title>Book Explorer | My Wishlist</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Underdog&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    
 </head>
 <body>
     <header>
@@ -23,29 +22,12 @@
 
     <main>
         <section class="hero">
-            <h1>Explore Books</h1>
-            <p>Find your next favorite book from our extensive collection</p>
+            <h1>My Wishlist</h1>
+            <p>Books you've saved for later</p>
         </section>
         
-        <section class="filters">
-            <div class="search-container">
-                <input type="text" id="search-input" placeholder="Search by title...">
-            </div>
-            <div class="filter-container">
-                <select id="genre-filter">
-                    <option value="">All Genres</option>
-                    <!-- Will be populated dynamically -->
-                </select>
-            </div>
-        </section>
-
-        <section class="books-container" id="books-list">
-            <!-- Books will be displayed here -->
-            <div class="loading">Loading books...</div>
-        </section>
-        
-        <section class="pagination" id="pagination">
-            <!-- Pagination controls will be added here -->
+        <section class="books-container" id="wishlist-books">
+            <!-- Wishlist books will be displayed here -->
         </section>
     </main>
 
@@ -56,7 +38,10 @@
     <script src="js/utils.js"></script>
     <script src="js/api.js"></script>
     <script src="js/wishlist.js"></script>
-    <script src="js/books.js"></script>
-    <script src="js/ui.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            displayWishlistBooks();
+        });
+    </script>
 </body>
 </html>

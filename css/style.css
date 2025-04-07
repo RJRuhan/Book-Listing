@@ -24,7 +24,9 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Underdog", system-ui;
+    font-weight: 400;
+    font-style: normal;
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
@@ -94,6 +96,14 @@ main {
     font-weight: bold;
 }
 
+.logo a {
+    color: white;
+    text-decoration: none;
+}
+
+.logo a:hover {
+    color: var(--primary-light);
+}
 .nav-links {
     list-style: none;
     display: flex;
@@ -166,3 +176,4 @@ main {
     font-size: 1rem;
     background-color: white;
 }
+

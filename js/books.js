@@ -83,7 +83,6 @@ async function loadBooks() {
         totalPages = Math.ceil(data.count / 32); // API returns 32 books per page
         nextPageUrl = data.next;
         previousPageUrl = data.previous;
-        console.log('Current page:', currentPage);
         
         // Display books
         displayBooks(currentBooks);
@@ -91,8 +90,10 @@ async function loadBooks() {
         // Update pagination
         displayPagination(totalPages, currentPage);
         
+        // console.log(document.getElementById('genre-filter').options.length);
+        
         // Populate genre filter if it's the first load
-        if (!document.getElementById('genre-filter').options.length > 1) {
+        if (document.getElementById('genre-filter').options.length == 1) {
             populateGenreFilter(currentBooks);
         }
     } catch (error) {
@@ -314,7 +315,7 @@ function loadUserPreferences() {
 // Show loading state
 function showLoading() {
     const booksContainer = document.getElementById('books-list');
-    booksContainer.innerHTML = '<div class="loading">Loading books...</div>';
+    booksContainer.innerHTML = '<div class="loading"></div>';
 }
 
 // Show error message

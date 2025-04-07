@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Explorer | Book Details</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Underdog&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo"><a href="index.html">Book Explorer</a></div>
+            <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="wishlist.html">My Wishlist</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="book-details" id="book-details">
+            <!-- Book details will be displayed here -->
+            <div class="loading"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Book Explorer. All rights reserved.</p>
+    </footer>
+
+    <script src="js/utils.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/wishlist.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const bookId = urlParams.get('id');
+            
+            if (bookId) {
+                displayBookDetails(bookId);
+            } else {
+                document.getElementById('book-details').innerHTML = '<div class="error">Book not found</div>';
+            }
+        });
+
+        async function displayBookDetails(bookId) {
+            try {
+                const book = await fetchBook(bookId);
+                const wishlist = getWishlist();
+                const isWishlisted = wishlist.includes(parseInt(bookId));
+
+                const bookDetails = document.getElementById('book-details');
+                
+                if (!book) {
+                    bookDetails.innerHTML = '<div class="error">Book not found</div>';
+                    return;
+                }
+
+                const coverImage = book.formats['image/jpeg'] || 'assets/default-cover.png';
+                
+                bookDetails.innerHTML = `
+                    <div class="book-detail-container">
+                        <div class="book-image">
+                            <img src="${coverImage}" alt="${book.title}" loading="lazy">
+                        </div>
+                        <div class="book-info">
+                            <h1>${book.title}</h1>
+                            <div class="authors">
+                                ${book.authors.map(author => `<span>${author.name} (${author.birth_year || '?'} - ${author.death_year || '?'})</span>`).join(', ')}
+                            </div>
+                            <div class="book-meta">
+                                <p><strong>ID:</strong> ${book.id}</p>
+                                <p><strong>Languages:</strong> ${book.languages.join(', ')}</p>
+                                <p><strong>Download Count:</strong> ${book.download_count}</p>
+                            </div>
+                            <div class="book-genre">
+                                <h3>Subjects:</h3>
+                                <div class="tag-container">
+                                    ${book.subjects.map(subject => `<span class="tag">${subject}</span>`).join('')}
+                                </div>
+                            </div>
+                            <div class="book-bookshelves">
+                                <h3>Bookshelves:</h3>
+                                <div class="tag-container">
+                                    ${book.bookshelves.map(bookshelf => `<span class="tag">${bookshelf}</span>`).join('')}
+                                </div>
+                            </div>
+                            <div class="action-buttons">
+                                <button class="wishlist-btn ${isWishlisted ? 'wishlisted' : ''}" 
+                                    data-id="${book.id}" onclick="toggleWishlist(${book.id})">
+                                    ${isWishlisted ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                                </button>
+                                <a href="index.html" class="back-btn">Back to Books</a>
+                            </div>
+                            <div class="book-formats">
+                                <h3>Available Formats:</h3>
+                                <ul>
+                                    ${Object.entries(book.formats).map(([type, url]) => 
+                                        `<li><a href="${url}" target="_blank">${type}</a></li>`
+                                    ).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Error displaying book details:', error);
+                document.getElementById('book-details').innerHTML = '<div class="error">Failed to load book details</div>';
+            }
+        }
+    </script>
+</body>
+</html>

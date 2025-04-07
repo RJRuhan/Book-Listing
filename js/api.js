@@ -55,6 +55,8 @@ function extractGenres(books) {
         book.subjects.forEach(subject => genreSet.add(subject));
         book.bookshelves.forEach(bookshelf => genreSet.add(bookshelf));
     });
+
+    console.log('Extracted genres:', genreSet);
     
     return Array.from(genreSet).sort();
 }
