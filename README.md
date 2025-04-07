@@ -22,7 +22,7 @@ The **Book Listing App** is a simple web application that allows users to browse
     ```
 2. Navigate to the project directory:
     ```bash
-    cd book-listing-app
+    cd Book-Listing
     ```
 3. Open the `index.html` file in your browser:
     ```bash
